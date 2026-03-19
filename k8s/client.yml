@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meet-client
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: meet-client
+  template:
+    metadata:
+      labels:
+        app: meet-client
+    spec:
+      containers:
+        - name: client
+          image: aimeetregistry.azurecr.io/meet-client
+          ports:
+            - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: meet-client-service
+spec:
+  selector:
+    app: meet-client
+  ports:
+    - port: 80
+      targetPort: 80
+  type: LoadBalancer

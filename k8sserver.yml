@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: meet-server
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: meet-server
+  template:
+    metadata:
+      labels:
+        app: meet-server
+    spec:
+      containers:
+        - name: server
+          image: aimeetregistry.azurecr.io/meet-server
+          ports:
+            - containerPort: 3001
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: meet-server-service
+spec:
+  selector:
+    app: meet-server
+  ports:
+    - port: 3001
+      targetPort: 3001
+  type: ClusterIP

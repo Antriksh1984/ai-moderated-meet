@@ -19,12 +19,13 @@ jobs:
 
       - name: Login to ACR
         run: az acr login --name aimeetregistry
-
       - name: Build and Push Client
         run: |
-          docker build -t aimeetregistry.azurecr.io/meet-client ./client
+          docker build \
+          -t aimeetregistry.azurecr.io/meet-client \
+          --build-arg REACT_APP_API_URL=http://meet-server-service:3001 \
+          ./client
           docker push aimeetregistry.azurecr.io/meet-client
-
       - name: Build and Push Server
         run: |
           docker build -t aimeetregistry.azurecr.io/meet-server ./server
