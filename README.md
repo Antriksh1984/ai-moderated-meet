@@ -1,47 +1,47 @@
-# 🚀 AI Moderated WebRTC Video Platform (Azure + Kubernetes)
+# 🚀 AI-Moderated WebRTC Video Platform (Azure + Kubernetes)
 
-A production-grade real-time video conferencing platform built with **WebRTC, Socket.IO, Docker, Kubernetes (AKS), and Azure DevOps tools**, enhanced with AI-based content moderation.
+A cloud-native, production-grade real-time video conferencing platform with **AI-powered content moderation**, built using WebRTC, Kubernetes (AKS), and Azure AI services.
 
 ---
 
 ## 🌟 Features
 
-* 🎥 Real-time video communication (WebRTC)
+* 🎥 Real-time video conferencing (WebRTC)
 * 🔌 Socket.IO signaling server
-* ⚡ Scalable microservices architecture (Docker + Kubernetes)
-* ☁️ Deployed on Azure Kubernetes Service (AKS)
+* ☁️ Cloud-native deployment on Azure Kubernetes Service (AKS)
 * 🔁 CI/CD pipeline using GitHub Actions
-* 📦 Container registry using Azure Container Registry (ACR)
-* 📊 Observability ready (Prometheus + Grafana)
-* 🧠 AI moderation pipeline (Azure-based)
+* 📦 Azure Container Registry (ACR) integration
+* 🤖 AI-powered content moderation (Azure AI Content Safety)
+* 📊 Observability-ready (Prometheus + Grafana)
+* ⚡ Scalable microservices architecture
 
 ---
 
 ## 🏗️ Tech Stack
 
-| Layer            | Tech                     |
-| ---------------- | ------------------------ |
-| Frontend         | React                    |
-| Backend          | Node.js + Socket.IO      |
-| Realtime         | WebRTC                   |
-| Containerization | Docker                   |
-| Orchestration    | Kubernetes (AKS)         |
-| CI/CD            | GitHub Actions           |
-| Cloud            | Azure                    |
-| Registry         | Azure Container Registry |
-| Monitoring       | Prometheus + Grafana     |
+| Layer            | Technology                              |
+| ---------------- | --------------------------------------- |
+| Frontend         | React                                   |
+| Backend          | Node.js + Socket.IO                     |
+| Realtime         | WebRTC                                  |
+| Containerization | Docker                                  |
+| Orchestration    | Kubernetes (AKS)                        |
+| CI/CD            | GitHub Actions                          |
+| Cloud            | Microsoft Azure                         |
+| Registry         | Azure Container Registry                |
+| AI Moderation    | Azure AI Content Safety / Video Indexer |
 
 ---
 
 ## 📦 Project Structure
 
-```
+```text
 .
-├── client/          # React frontend
-├── server/          # Socket.IO backend
-├── k8s/             # Kubernetes manifests
-├── .github/workflows/ci.yml   # CI/CD pipeline
-└── docker-compose.yml         # Local dev setup
+├── client/                     # React frontend
+├── server/                     # Node.js + Socket.IO backend
+├── k8s/                        # Kubernetes manifests
+├── .github/workflows/ci.yml    # CI/CD pipeline
+└── docker-compose.yml          # Local development
 ```
 
 ---
@@ -61,11 +61,11 @@ Access:
 
 ## 🚀 CI/CD Pipeline
 
-On every push to `main`:
+On push to `main`:
 
-1. Build Docker images
-2. Push to Azure Container Registry (ACR)
-3. Ready for Kubernetes deployment
+1. Build Docker images (client + server)
+2. Push images to Azure Container Registry (ACR)
+3. Deploy images to Azure Kubernetes Service (AKS)
 
 ---
 
@@ -75,7 +75,7 @@ On every push to `main`:
 kubectl apply -f k8s/
 ```
 
-Check:
+Verify:
 
 ```bash
 kubectl get pods
@@ -90,45 +90,110 @@ kubectl get svc
 kubectl get svc meet-client-service
 ```
 
-Open EXTERNAL-IP in browser.
+Open the external IP in your browser.
 
 ---
 
-## ⚠️ Known Constraints
+# 🤖 AI Content Moderation (Core Feature)
 
-* Camera access requires **HTTPS (WebRTC security restriction)**
-* Socket.IO scaling requires sticky sessions or single replica
+This platform integrates **Azure AI Content Safety** to automatically detect:
+
+* 🚫 Hate speech
+* 🔞 Sexual content
+* ⚠ Violence
+* 🧠 Harmful or abusive behavior
+
+---
+
+## 🧠 How AI Moderation Works
+
+### 🔄 Flow
+
+```text
+User Video Stream
+        ↓
+Backend (Node.js)
+        ↓
+Frame Extraction (periodic snapshots)
+        ↓
+Azure AI Content Safety API
+        ↓
+Moderation Decision Engine
+        ↓
+✔ Allow   ⚠ Flag   ❌ Block User
+```
+
+---
+
+## ⚙️ Implementation Strategy
+
+### Option 1 — Real-time moderation (advanced)
+
+* Extract frames every few seconds
+* Send to Azure AI API
+* Take action instantly (mute / disconnect)
+
+### Option 2 — Async moderation (recommended initial approach)
+
+* Record session
+* Upload to Azure Blob Storage
+* Run AI analysis post-call
+
+---
+
+## 🧠 Sample Backend Integration (Pseudo Code)
+
+```javascript
+const response = await axios.post(AZURE_AI_ENDPOINT, {
+  image: frameData
+});
+
+if (response.data.riskLevel > threshold) {
+  disconnectUser(socket.id);
+}
+```
+
+---
+
+## ⚠️ Constraints
+
+* WebRTC camera requires **HTTPS (secure context)**
+* Socket.IO scaling requires **sticky sessions or single replica**
+* AI moderation latency depends on API response time
 
 ---
 
 ## 🔐 Future Improvements
 
-* Ingress + HTTPS (Let's Encrypt)
-* Horizontal scaling with sticky sessions
-* AI moderation integration pipeline
-* Autoscaling (HPA)
-* Logging (ELK / Azure Monitor)
+* 🌐 Ingress + HTTPS (Let’s Encrypt)
+* 📊 Prometheus + Grafana monitoring
+* 📈 Horizontal Pod Autoscaling (HPA)
+* 🧠 Real-time speech moderation
+* 📦 Azure Event-driven moderation pipeline
+* 🧾 Audit logs & moderation dashboard
 
 ---
 
-## 🧠 Architecture Highlights
+## 🧠 Architecture Overview
 
 * Microservices deployed on AKS
-* Container images stored in ACR
-* CI/CD fully automated via GitHub Actions
-* Real-time communication handled via WebRTC + Socket.IO
+* CI/CD automated via GitHub Actions
+* Images stored in Azure Container Registry
+* Real-time communication via WebRTC + Socket.IO
+* AI moderation integrated via Azure AI APIs
 
 ---
 
 ## 👨‍💻 Author
 
-Built as a cloud-native, production-grade system for learning and showcasing:
+Built as a full-stack cloud-native system demonstrating:
 
-* Kubernetes
+* Kubernetes (AKS)
 * Azure Cloud
 * DevOps pipelines
-* Real-time systems
+* Real-time systems (WebRTC)
+* AI integration in production
 
 ---
 
-🔥 This project demonstrates end-to-end cloud-native system design.
+🔥 This project represents an end-to-end scalable AI-powered system.
