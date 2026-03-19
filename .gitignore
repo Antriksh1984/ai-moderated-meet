@@ -1,0 +1,15 @@
+# dependencies
+node_modules/
+
+# build
+build/
+dist/
+
+# env
+.env
+
+# logs
+npm-debug.log*
+
+# cache
+.cache/
