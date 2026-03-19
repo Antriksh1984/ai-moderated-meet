@@ -23,7 +23,7 @@ jobs:
         run: |
           docker build \
           -t aimeetregistry.azurecr.io/meet-client \
-          --build-arg REACT_APP_API_URL=http://meet-server-service:3001 \
+          --build-arg REACT_APP_API_URL=http://<SERVER-EXTERNAL-IP>:3001 \
           ./client
           docker push aimeetregistry.azurecr.io/meet-client
       - name: Build and Push Server
