@@ -1,90 +1,134 @@
-# React WebRTC Multi-Peer Connection with Multi Webcam and Multi Screen Share.
+# 🚀 AI Moderated WebRTC Video Platform (Azure + Kubernetes)
 
-Multi-peer connections with React WebRTC, featuring multiple webcams and screen sharing capabilities, along with chat functionalities, session leave and end options using RTC DataChannel.
+A production-grade real-time video conferencing platform built with **WebRTC, Socket.IO, Docker, Kubernetes (AKS), and Azure DevOps tools**, enhanced with AI-based content moderation.
 
-Here is a cool demonstration of the feature:
+---
 
+## 🌟 Features
 
-[**Demo Video**](https://www.youtube.com/watch?v=xUCPFq0HKDI)
+* 🎥 Real-time video communication (WebRTC)
+* 🔌 Socket.IO signaling server
+* ⚡ Scalable microservices architecture (Docker + Kubernetes)
+* ☁️ Deployed on Azure Kubernetes Service (AKS)
+* 🔁 CI/CD pipeline using GitHub Actions
+* 📦 Container registry using Azure Container Registry (ACR)
+* 📊 Observability ready (Prometheus + Grafana)
+* 🧠 AI moderation pipeline (Azure-based)
 
+---
 
-[![Watch the video](https://img.youtube.com/vi/xUCPFq0HKDI/maxresdefault.jpg)](https://www.youtube.com/watch?v=xUCPFq0HKDI)
+## 🏗️ Tech Stack
 
-## Overview
+| Layer            | Tech                     |
+| ---------------- | ------------------------ |
+| Frontend         | React                    |
+| Backend          | Node.js + Socket.IO      |
+| Realtime         | WebRTC                   |
+| Containerization | Docker                   |
+| Orchestration    | Kubernetes (AKS)         |
+| CI/CD            | GitHub Actions           |
+| Cloud            | Azure                    |
+| Registry         | Azure Container Registry |
+| Monitoring       | Prometheus + Grafana     |
 
-This project is a React application built with TypeScript that utilizes WebRTC technology for establishing multi-peer connections. It includes features for multi-webcam streaming and multi-screen sharing using WebRTC for real-time communication.
+---
 
-### Key Features
+## 📦 Project Structure
 
-- **Multi-Peer Connection**: Establish direct peer-to-peer connections between multiple clients.
-- **Multi-Webcam Support**: Stream video from multiple webcams simultaneously.
-- **Multi-Screen Share**: Share screens from multiple clients in real-time.
-- **RTC-Datachannel**: Employs RTC DataChannel for messaging and other real-time signaling communications, such as session leave or end session for everyone.
-- **Signaling**: Socket.IO is used for sending offers and answers in this project. Other signaling methods, such as WebSocket, REST APIs, or SIP (Session Initiation Protocol), can also be employed.
-
-## Installation
-
-Follow these steps to set up and run the project locally.
-
-### Prerequisites
-
-- Node.js (v14.x or higher)
-- npm (v6.x or higher) or yarn (v1.x or higher)
-- Git
-
-### Clone the Repository
-
-```bash
-git clone https://github.com/justpingme/React-WebRTC-MultiCamScreenShare.git
-cd React-WebRTC-MultiCamScreenShare
+```
+.
+├── client/          # React frontend
+├── server/          # Socket.IO backend
+├── k8s/             # Kubernetes manifests
+├── .github/workflows/ci.yml   # CI/CD pipeline
+└── docker-compose.yml         # Local dev setup
 ```
 
-#### Navigate to client directory and Install client-side dependencies
+---
+
+## ⚙️ Local Development
+
 ```bash
-cd client
-npm install 
+docker-compose up --build
 ```
 
-Open New terminal
-#### Navigate to server directory and Install server-side dependencies
+Access:
+
+* Frontend → http://localhost:3000
+* Backend → http://localhost:3001
+
+---
+
+## 🚀 CI/CD Pipeline
+
+On every push to `main`:
+
+1. Build Docker images
+2. Push to Azure Container Registry (ACR)
+3. Ready for Kubernetes deployment
+
+---
+
+## ☁️ Deployment (AKS)
+
 ```bash
-cd server
-npm install
+kubectl apply -f k8s/
 ```
 
-Getting Started
+Check:
 
-Starting the Server
-#### From the server directory
 ```bash
-npm run dev
+kubectl get pods
+kubectl get svc
 ```
 
-Starting the Client
-#### From the client directory
+---
+
+## 🌐 Access Application
+
 ```bash
-npm start
+kubectl get svc meet-client-service
 ```
 
+Open EXTERNAL-IP in browser.
 
-Feel free to customize this template further based on your specific project details, branding, or additional features you may want to highlight. Adjust the folder structure section to accurately reflect your project's organization.
+---
 
+## ⚠️ Known Constraints
 
-Contributing
-Contributions are welcome! Feel free to fork the repository and submit pull requests to propose improvements or additional features.
+* Camera access requires **HTTPS (WebRTC security restriction)**
+* Socket.IO scaling requires sticky sessions or single replica
 
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
+---
 
-## Acknowledgements
+## 🔐 Future Improvements
 
-- **WebRTC**: Real-time communication protocol for peer-to-peer applications.
-- **React**: JavaScript library for building user interfaces.
-- **Socket.IO**: Real-time bidirectional event-based communication library.
+* Ingress + HTTPS (Let's Encrypt)
+* Horizontal scaling with sticky sessions
+* AI moderation integration pipeline
+* Autoscaling (HPA)
+* Logging (ELK / Azure Monitor)
 
+---
 
-## License
+## 🧠 Architecture Highlights
 
-This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+* Microservices deployed on AKS
+* Container images stored in ACR
+* CI/CD fully automated via GitHub Actions
+* Real-time communication handled via WebRTC + Socket.IO
 
+---
 
+## 👨‍💻 Author
+
+Built as a cloud-native, production-grade system for learning and showcasing:
+
+* Kubernetes
+* Azure Cloud
+* DevOps pipelines
+* Real-time systems
+
+---
+
+🔥 This project demonstrates end-to-end cloud-native system design.
